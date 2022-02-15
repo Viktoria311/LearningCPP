@@ -63,7 +63,7 @@ int enter_columns()
 int enter_quantity_of_points(int rows, int columns)
 {
 	int points_for_wining;
-	std::cout << "And how many points will it enough for wining? Enter a number: ";//как много позиций рядом для победы будет достаточно?
+	std::cout << "And how many points will it enough for wining? Enter a number: ";//ГЄГ ГЄ Г¬Г­Г®ГЈГ® ГЇГ®Г§ГЁГ¶ГЁГ© Г°ГїГ¤Г®Г¬ Г¤Г«Гї ГЇГ®ГЎГҐГ¤Г» ГЎГіГ¤ГҐГІ Г¤Г®Г±ГІГ ГІГ®Г·Г­Г®?
 	while (!(std::cin >> points_for_wining) || points_for_wining < 3 || (points_for_wining > rows && points_for_wining > columns)  )
 	{
 		if (!std::cin)
@@ -90,14 +90,14 @@ void init_arr(char** my_arr, int x, int y)
 void show_field( char** my_arr, int x, int y)
 {
 	
-//выводим цифры в шапочке
+//ГўГ»ГўГ®Г¤ГЁГ¬ Г¶ГЁГґГ°Г» Гў ГёГ ГЇГ®Г·ГЄГҐ
 	std::cout << '\t';
 	for (int i = 1; i <= y; ++i)
 		std::cout << i << '\t';
 
 	std::cout << std::endl << std::endl;
 
-	//выводим остальное поле
+	//ГўГ»ГўГ®Г¤ГЁГ¬ Г®Г±ГІГ Г«ГјГ­Г®ГҐ ГЇГ®Г«ГҐ
 	for (int i = 1; i <= x; ++i)
 	{
 		std::cout << i << " ";
@@ -143,7 +143,7 @@ void player_steps(char** my_arr, char player_point, int rows, int columns)
 			else  std::cout << "The number of rows can`t be less than 3/ It`a a tic-tac-toe!!!" << std::endl;
 
 			std::cout << "Try again to enter a quantity of rows: ";
-			while (std::cin.get() != '\n') continue;// ДОБАВИЛА СТРОКУ. МОЖЕТ, ОНА ЛИШНЯЯ
+			while (std::cin.get() != '\n') continue;// Г„ГЋГЃГЂГ‚Г€Г‹ГЂ Г‘Г’ГђГЋГЉГ“. ГЊГЋГ†Г…Г’, ГЋГЌГЂ Г‹Г€ГГЌГџГџ
 		}
 		std::cout << "Enter a number of column: ";
 		while (!(std::cin >> column_of_player_step) || column_of_player_step > columns || column_of_player_step <= 0)
@@ -157,7 +157,7 @@ void player_steps(char** my_arr, char player_point, int rows, int columns)
 			else  std::cout << "The number of rows can`t be less than 3/ It`a a tic-tac-toe!!!" << std::endl;
 
 			std::cout << "Try again to enter a quantity of columns: ";
-			while (std::cin.get() != '\n') continue;// ДОБАВИЛА СТРОКУ. МОЖЕТ, ОНА ЛИШНЯЯ
+			while (std::cin.get() != '\n') continue;// Г„ГЋГЃГЂГ‚Г€Г‹ГЂ Г‘Г’ГђГЋГЉГ“. ГЊГЋГ†Г…Г’, ГЋГЌГЂ Г‹Г€ГГЌГџГџ
 		}
 		--row_of_player_step;
 		--column_of_player_step;
@@ -175,7 +175,7 @@ void machine_steps(char** my_arr, char machine_point, int rows, int columns)
 
 	do
 	{
-		//машина придумывает случайное число
+		//Г¬Г ГёГЁГ­Г  ГЇГ°ГЁГ¤ГіГ¬Г»ГўГ ГҐГІ Г±Г«ГіГ·Г Г©Г­Г®ГҐ Г·ГЁГ±Г«Г®
 		row_of_machine_step =  rand() % rows;
 		column_of_machine_step = rand() % columns;
 	
@@ -187,112 +187,112 @@ void machine_steps(char** my_arr, char machine_point, int rows, int columns)
 bool is_there_a_winner(char** my_arr, int quantity, int  rows, int columns)
 {
 	int count = 0;
-	//проверка по горизонтали 
+	//ГЇГ°Г®ГўГҐГ°ГЄГ  ГЇГ® ГЈГ®Г°ГЁГ§Г®Г­ГІГ Г«ГЁ 
 	for (int i = 0; i < rows; ++i)
 	{
 		for (int j = 0; j < columns; ++j)
 
-			for (int m = 1; m < quantity && j + m < rows; ++m)//цикл проверки одинаковых элементов подряд
+			for (int m = 1; m < quantity && j + m < rows; ++m)//Г¶ГЁГЄГ« ГЇГ°Г®ГўГҐГ°ГЄГЁ Г®Г¤ГЁГ­Г ГЄГ®ГўГ»Гµ ГЅГ«ГҐГ¬ГҐГ­ГІГ®Гў ГЇГ®Г¤Г°ГїГ¤
 				if (my_arr[i][j] != '*' && my_arr[i][j] == my_arr[i][j + m]) ++count;
 
 		if (count == quantity - 1) return true;
 		count = 0;
 	}
-	//проверка по вертикали
+	//ГЇГ°Г®ГўГҐГ°ГЄГ  ГЇГ® ГўГҐГ°ГІГЁГЄГ Г«ГЁ
 	for (int i = 0; i < rows; ++i)
 	{
 		for (int j = 0; j < columns; ++j)
 
-			for (int m = 1; m < quantity && i + m < rows; ++m)//цикл проверки одинаковых элементов подряд
+			for (int m = 1; m < quantity && i + m < rows; ++m)//Г¶ГЁГЄГ« ГЇГ°Г®ГўГҐГ°ГЄГЁ Г®Г¤ГЁГ­Г ГЄГ®ГўГ»Гµ ГЅГ«ГҐГ¬ГҐГ­ГІГ®Гў ГЇГ®Г¤Г°ГїГ¤
 				if (my_arr[i][j] != '*' && my_arr[i][j] == my_arr[i + m][j]) ++count;
 
 		if (count == quantity - 1) return true;
 		count = 0;
 	}
-	//проверка по диагонали СЛЕВА НАПРАВО И СВЕРХУ ВНИЗ
+	//ГЇГ°Г®ГўГҐГ°ГЄГ  ГЇГ® Г¤ГЁГ ГЈГ®Г­Г Г«ГЁ Г‘Г‹Г…Г‚ГЂ ГЌГЂГЏГђГЂГ‚ГЋ Г€ Г‘Г‚Г…ГђГ•Г“ Г‚ГЌГ€Г‡
 	for (int j = 0; j < columns; ++j)
 	{
 		for (int i = 0; i < rows; ++i)
 
-			for (int m = 1; m < quantity    &&  i + m < rows &&  j + m < columns; ++m)//цикл проверки одинаковых элементов подряд
+			for (int m = 1; m < quantity    &&  i + m < rows &&  j + m < columns; ++m)//Г¶ГЁГЄГ« ГЇГ°Г®ГўГҐГ°ГЄГЁ Г®Г¤ГЁГ­Г ГЄГ®ГўГ»Гµ ГЅГ«ГҐГ¬ГҐГ­ГІГ®Гў ГЇГ®Г¤Г°ГїГ¤
 				if (my_arr[i][j] != '*' && my_arr[i][j] == my_arr[i + m][j + m]) ++count;
 
 		if (count == quantity - 1) return true;
 		count = 0;
 	}
 
-	//проверка по диагонали СЛЕВА НАПРАВО И СНИЗУ ВВЕРХ
+	//ГЇГ°Г®ГўГҐГ°ГЄГ  ГЇГ® Г¤ГЁГ ГЈГ®Г­Г Г«ГЁ Г‘Г‹Г…Г‚ГЂ ГЌГЂГЏГђГЂГ‚ГЋ Г€ Г‘ГЌГ€Г‡Г“ Г‚Г‚Г…ГђГ•
 	for (int j = 0; j < columns; ++j)
 	{
 		for (int i = rows - 1; i >= 0; --i)
 
-			for (int m = 1; m < quantity && i - m >= 0 && j + m < columns; ++m)//цикл проверки одинаковых элементов подряд
+			for (int m = 1; m < quantity && i - m >= 0 && j + m < columns; ++m)//Г¶ГЁГЄГ« ГЇГ°Г®ГўГҐГ°ГЄГЁ Г®Г¤ГЁГ­Г ГЄГ®ГўГ»Гµ ГЅГ«ГҐГ¬ГҐГ­ГІГ®Гў ГЇГ®Г¤Г°ГїГ¤
 				if (my_arr[i][j] != '*' && my_arr[i][j] == my_arr[i - m][j + m]) ++count;
 
 		if (count == quantity - 1) return true;
 		count = 0;
 	}
 
-	//проверка по диагонали СПРАВА НАЛЕВО И СВЕРХУ ВНИЗ
+	//ГЇГ°Г®ГўГҐГ°ГЄГ  ГЇГ® Г¤ГЁГ ГЈГ®Г­Г Г«ГЁ Г‘ГЏГђГЂГ‚ГЂ ГЌГЂГ‹Г…Г‚ГЋ Г€ Г‘Г‚Г…ГђГ•Г“ Г‚ГЌГ€Г‡
 	for (int j = columns - 1; j >= 0; --j)
 	{
 		for (int i = 0; i < rows; ++i)
 
-			for (int m = 1; m < quantity && i + m < rows  && j - m >= 0; ++m)//цикл проверки одинаковых элементов подряд
+			for (int m = 1; m < quantity && i + m < rows  && j - m >= 0; ++m)//Г¶ГЁГЄГ« ГЇГ°Г®ГўГҐГ°ГЄГЁ Г®Г¤ГЁГ­Г ГЄГ®ГўГ»Гµ ГЅГ«ГҐГ¬ГҐГ­ГІГ®Гў ГЇГ®Г¤Г°ГїГ¤
 				if (my_arr[i][j] != '*' && my_arr[i][j] == my_arr[i + m][j - m]) ++count;
 
 		if (count == quantity - 1) return true;
 		count = 0;
 	}
 
-	//проверка по диагонали СПРАВА НАЛЕВО И СНИЗУ ВВЕРХ
+	//ГЇГ°Г®ГўГҐГ°ГЄГ  ГЇГ® Г¤ГЁГ ГЈГ®Г­Г Г«ГЁ Г‘ГЏГђГЂГ‚ГЂ ГЌГЂГ‹Г…Г‚ГЋ Г€ Г‘ГЌГ€Г‡Г“ Г‚Г‚Г…ГђГ•
 	for (int j = columns - 1; j >= 0; --j)
 	{
 		for (int i = rows - 1; i >= 0; --i)
 
-			for (int m = 1; m < quantity && i - m >= 0  && j - m >= 0; ++m)//цикл проверки одинаковых элементов подряд
+			for (int m = 1; m < quantity && i - m >= 0  && j - m >= 0; ++m)//Г¶ГЁГЄГ« ГЇГ°Г®ГўГҐГ°ГЄГЁ Г®Г¤ГЁГ­Г ГЄГ®ГўГ»Гµ ГЅГ«ГҐГ¬ГҐГ­ГІГ®Гў ГЇГ®Г¤Г°ГїГ¤
 				if (my_arr[i][j] != '*' && my_arr[i][j] == my_arr[i - m][j - m]) ++count;
 		    
 		if (count == quantity - 1) return true;
 		count = 0;
 	}
 
-	return false;//  если в предыдущих проверках не было полных последовательностей одинаковых значков
+	return false;//  ГҐГ±Г«ГЁ Гў ГЇГ°ГҐГ¤Г»Г¤ГіГ№ГЁГµ ГЇГ°Г®ГўГҐГ°ГЄГ Гµ Г­ГҐ ГЎГ»Г«Г® ГЇГ®Г«Г­Г»Гµ ГЇГ®Г±Г«ГҐГ¤Г®ГўГ ГІГҐГ«ГјГ­Г®Г±ГІГҐГ© Г®Г¤ГЁГ­Г ГЄГ®ГўГ»Гµ Г§Г­Г Г·ГЄГ®Гў
 }
 
 bool is_player_a_winner( char** my_arr, char customer_point, int quantity, int rows, int columns)
 {
 	int count = 0;
-	//проверка по горизонтали 
+	//ГЇГ°Г®ГўГҐГ°ГЄГ  ГЇГ® ГЈГ®Г°ГЁГ§Г®Г­ГІГ Г«ГЁ 
 	for (int i = 0; i < rows; ++i)
 	{
 		for (int j = 0; j < columns; ++j)
 
-			for (int m = 1; m < quantity && j + m < rows; ++m)//цикл проверки одинаковых элементов подряд
+			for (int m = 1; m < quantity && j + m < rows; ++m)//Г¶ГЁГЄГ« ГЇГ°Г®ГўГҐГ°ГЄГЁ Г®Г¤ГЁГ­Г ГЄГ®ГўГ»Гµ ГЅГ«ГҐГ¬ГҐГ­ГІГ®Гў ГЇГ®Г¤Г°ГїГ¤
 				if (my_arr[i][j] == customer_point  && my_arr[i][j] == my_arr[i][j + m]) ++count;
 
 		if (count == quantity - 1) return true;
 
 		count = 0;
 	}
-	//проверка по вертикали
+	//ГЇГ°Г®ГўГҐГ°ГЄГ  ГЇГ® ГўГҐГ°ГІГЁГЄГ Г«ГЁ
 	for (int i = 0; i < rows; ++i)
 	{
+		
 		for (int j = 0; j < columns; ++j)
-
-			for (int m = 1; m < quantity && i + m < rows; ++m)//цикл проверки одинаковых элементов подряд
+			for (int m = 1; m < quantity && i + m < rows; ++m)//Г¶ГЁГЄГ« ГЇГ°Г®ГўГҐГ°ГЄГЁ Г®Г¤ГЁГ­Г ГЄГ®ГўГ»Гµ ГЅГ«ГҐГ¬ГҐГ­ГІГ®Гў ГЇГ®Г¤Г°ГїГ¤
 				if (my_arr[i][j] == customer_point  && my_arr[i][j] == my_arr[i + m][j]) ++count;
 
 		if (count == quantity - 1) return true;
 
 		count = 0;
 	}
-	//проверка по диагонали СЛЕВА НАПРАВО  и СВЕРХУ ВНИЗ
+	//ГЇГ°Г®ГўГҐГ°ГЄГ  ГЇГ® Г¤ГЁГ ГЈГ®Г­Г Г«ГЁ Г‘Г‹Г…Г‚ГЂ ГЌГЂГЏГђГЂГ‚ГЋ  ГЁ Г‘Г‚Г…ГђГ•Г“ Г‚ГЌГ€Г‡
 	for (int j = 0; j < columns; ++j)
 	{
 		for (int i = 0; i < rows; ++i)
 
-			for (int m = 1; m < quantity && i + m < rows && j + m < columns; ++m)//цикл проверки одинаковых элементов подряд
+			for (int m = 1; m < quantity && i + m < rows && j + m < columns; ++m)//Г¶ГЁГЄГ« ГЇГ°Г®ГўГҐГ°ГЄГЁ Г®Г¤ГЁГ­Г ГЄГ®ГўГ»Гµ ГЅГ«ГҐГ¬ГҐГ­ГІГ®Гў ГЇГ®Г¤Г°ГїГ¤
 				if (my_arr[i][j] == customer_point   &&  my_arr[i][j] == my_arr[i + m][j + m]) ++count;
 
 		if (count == quantity - 1) return true;
@@ -300,12 +300,12 @@ bool is_player_a_winner( char** my_arr, char customer_point, int quantity, int r
 		count = 0;
 	}
 
-	//проверка по диагонали СЛЕВА НАПРАВО  и  СНИЗУ ВВЕРХ 
+	//ГЇГ°Г®ГўГҐГ°ГЄГ  ГЇГ® Г¤ГЁГ ГЈГ®Г­Г Г«ГЁ Г‘Г‹Г…Г‚ГЂ ГЌГЂГЏГђГЂГ‚ГЋ  ГЁ  Г‘ГЌГ€Г‡Г“ Г‚Г‚Г…ГђГ• 
 	for (int j = 0; j < columns; ++j)
 	{
 		for (int i = rows - 1; i >= 0; --i)
 
-			for (int m = 1; m < quantity && i + m < rows && j + m < columns; ++m)//цикл проверки одинаковых элементов подряд
+			for (int m = 1; m < quantity && i - m >= 0 && j + m < columns; ++m)//Г¶ГЁГЄГ« ГЇГ°Г®ГўГҐГ°ГЄГЁ Г®Г¤ГЁГ­Г ГЄГ®ГўГ»Гµ ГЅГ«ГҐГ¬ГҐГ­ГІГ®Гў ГЇГ®Г¤Г°ГїГ¤
 				if (my_arr[i][j] == customer_point && my_arr[i][j] == my_arr[i - m][j + m]) ++count;
 
 		if (count == quantity - 1) return true;
@@ -313,12 +313,12 @@ bool is_player_a_winner( char** my_arr, char customer_point, int quantity, int r
 		count = 0;
 	}
 
-	//проверка по диагонали СПРАВА НАЛЕВО И СВЕРХУ ВНИЗ
+	//ГЇГ°Г®ГўГҐГ°ГЄГ  ГЇГ® Г¤ГЁГ ГЈГ®Г­Г Г«ГЁ Г‘ГЏГђГЂГ‚ГЂ ГЌГЂГ‹Г…Г‚ГЋ Г€ Г‘Г‚Г…ГђГ•Г“ Г‚ГЌГ€Г‡
 	for (int j = columns- 1; j >= 0; --j)
 	{
 		for (int i = 0; i < rows; ++i)
 
-			for (int m = 1; m < quantity && i + m >= 0  &&  j - m >= 0; ++m)//цикл проверки одинаковых элементов подряд
+			for (int m = 1; m < quantity && i + m < rows  &&  j - m >= 0; ++m)//Г¶ГЁГЄГ« ГЇГ°Г®ГўГҐГ°ГЄГЁ Г®Г¤ГЁГ­Г ГЄГ®ГўГ»Гµ ГЅГ«ГҐГ¬ГҐГ­ГІГ®Гў ГЇГ®Г¤Г°ГїГ¤
 				if (my_arr[i][j] == customer_point  &&  my_arr[i][j] == my_arr[i + m][j - m]) ++count;
 
 		if (count == quantity - 1) return true;
@@ -326,12 +326,12 @@ bool is_player_a_winner( char** my_arr, char customer_point, int quantity, int r
 		count = 0;
 	}
 
-	//проверка по диагонали СПРАВА НАЛЕВО И СНИЗУ ВВЕРХ
+	//ГЇГ°Г®ГўГҐГ°ГЄГ  ГЇГ® Г¤ГЁГ ГЈГ®Г­Г Г«ГЁ Г‘ГЏГђГЂГ‚ГЂ ГЌГЂГ‹Г…Г‚ГЋ Г€ Г‘ГЌГ€Г‡Г“ Г‚Г‚Г…ГђГ•
 	for (int j = columns - 1; j >= 0; --j)
 	{
 		for (int i = rows - 1; i >= 0; --i)
 
-			for (int m = 1; m < quantity && i - m >= 0 && j - m >= 0; ++m)//цикл проверки одинаковых элементов подряд
+			for (int m = 1; m < quantity && i - m >= 0 && j - m >= 0; ++m)//Г¶ГЁГЄГ« ГЇГ°Г®ГўГҐГ°ГЄГЁ Г®Г¤ГЁГ­Г ГЄГ®ГўГ»Гµ ГЅГ«ГҐГ¬ГҐГ­ГІГ®Гў ГЇГ®Г¤Г°ГїГ¤
 				if (my_arr[i][j] == customer_point && my_arr[i][j] == my_arr[i - m][j - m]) ++count;
 
 		if (count == quantity - 1) return true;
@@ -339,7 +339,7 @@ bool is_player_a_winner( char** my_arr, char customer_point, int quantity, int r
 		count = 0;
 	}
 
-	return false;//  если в предыдущих проверках не было полных последовательностей одинаковых значков
+	return false;//  ГҐГ±Г«ГЁ Гў ГЇГ°ГҐГ¤Г»Г¤ГіГ№ГЁГµ ГЇГ°Г®ГўГҐГ°ГЄГ Гµ Г­ГҐ ГЎГ»Г«Г® ГЇГ®Г«Г­Г»Гµ ГЇГ®Г±Г«ГҐГ¤Г®ГўГ ГІГҐГ«ГјГ­Г®Г±ГІГҐГ© Г®Г¤ГЁГ­Г ГЄГ®ГўГ»Гµ Г§Г­Г Г·ГЄГ®Гў
 }
 
 bool is_arr_full( char** my_arr, int rows, int columns)
