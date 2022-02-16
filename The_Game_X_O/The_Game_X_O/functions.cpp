@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cctype>
 #include <cstdlib>
+#include "header.h"
 
 void choose_a_point(char& customer_point, char& computer_point)
 {
@@ -63,7 +64,7 @@ int enter_columns()
 int enter_quantity_of_points(int rows, int columns)
 {
 	int points_for_wining;
-	std::cout << "And how many points will it enough for wining? Enter a number: ";//êàê ìíîãî ïîçèöèé ðÿäîì äëÿ ïîáåäû áóäåò äîñòàòî÷íî?
+	std::cout << "And how many points will it enough for wining? Enter a number: ";
 	while (!(std::cin >> points_for_wining) || points_for_wining < 3 || (points_for_wining > rows && points_for_wining > columns)  )
 	{
 		if (!std::cin)
@@ -89,15 +90,14 @@ void init_arr(char** my_arr, int x, int y)
 
 void show_field( char** my_arr, int x, int y)
 {
-	
-//âûâîäèì öèôðû â øàïî÷êå
+	//верхушка поля
 	std::cout << '\t';
 	for (int i = 1; i <= y; ++i)
 		std::cout << i << '\t';
 
 	std::cout << std::endl << std::endl;
 
-	//âûâîäèì îñòàëüíîå ïîëå
+	//основное тело поля
 	for (int i = 1; i <= x; ++i)
 	{
 		std::cout << i << " ";
@@ -143,7 +143,7 @@ void player_steps(char** my_arr, char player_point, int rows, int columns)
 			else  std::cout << "The number of rows can`t be less than 3/ It`a a tic-tac-toe!!!" << std::endl;
 
 			std::cout << "Try again to enter a quantity of rows: ";
-			while (std::cin.get() != '\n') continue;// ÄÎÁÀÂÈËÀ ÑÒÐÎÊÓ. ÌÎÆÅÒ, ÎÍÀ ËÈØÍßß
+			while (std::cin.get() != '\n') continue;
 		}
 		std::cout << "Enter a number of column: ";
 		while (!(std::cin >> column_of_player_step) || column_of_player_step > columns || column_of_player_step <= 0)
@@ -157,7 +157,7 @@ void player_steps(char** my_arr, char player_point, int rows, int columns)
 			else  std::cout << "The number of rows can`t be less than 3/ It`a a tic-tac-toe!!!" << std::endl;
 
 			std::cout << "Try again to enter a quantity of columns: ";
-			while (std::cin.get() != '\n') continue;// ÄÎÁÀÂÈËÀ ÑÒÐÎÊÓ. ÌÎÆÅÒ, ÎÍÀ ËÈØÍßß
+			while (std::cin.get() != '\n') continue;
 		}
 		--row_of_player_step;
 		--column_of_player_step;
@@ -175,10 +175,8 @@ void machine_steps(char** my_arr, char machine_point, int rows, int columns)
 
 	do
 	{
-		//ìàøèíà ïðèäóìûâàåò ñëó÷àéíîå ÷èñëî
 		row_of_machine_step =  rand() % rows;
 		column_of_machine_step = rand() % columns;
-	
     } while(my_arr[row_of_machine_step][column_of_machine_step] != '*');
 
 	my_arr[row_of_machine_step][column_of_machine_step] = machine_point;
@@ -187,7 +185,7 @@ void machine_steps(char** my_arr, char machine_point, int rows, int columns)
 bool is_there_a_winner(char** my_arr, int quantity, int  rows, int columns)
 {
 	int count = 0;
-	//ïðîâåðêà ïî ãîðèçîíòàëè 
+	//проверка по горизонтали
 	for (int i = 0; i < rows; ++i)
 	{
 		for (int j = 0; j < columns; ++j)
@@ -224,7 +222,7 @@ bool is_there_a_winner(char** my_arr, int quantity, int  rows, int columns)
 		}
 	}
 
-	//ïðîâåðêà ïî äèàãîíàëè ÑËÅÂÀ ÍÀÏÐÀÂÎ È ÑÍÈÇÓ ÂÂÅÐÕ
+	//проверка по диагонали СЛЕВА НАПРАВО И СНИЗУ ВВЕРХ
 	for (int j = 0; j < columns; ++j)
 	{
 		for (int i = rows - 1; i >= 0; --i)
@@ -243,7 +241,7 @@ bool is_there_a_winner(char** my_arr, int quantity, int  rows, int columns)
 bool is_player_a_winner( char** my_arr, char customer_point, int quantity, int rows, int columns)
 {
 	int count = 0;
-	//ïðîâåðêà ïî ãîðèçîíòàëè 
+	//проверка по горизонтали
 	for (int i = 0; i < rows; ++i)
 	{
 		for (int j = 0; j < columns; ++j)
@@ -268,7 +266,7 @@ bool is_player_a_winner( char** my_arr, char customer_point, int quantity, int r
 			count = 0;
 		}
 	}
-	//проверка по диагонали СЛЕВА НАПРАВО  и СВЕРХУ ВНИЗ
+	//проверка по диагонали СЛЕВА НАПРАВО и СВЕРХУ ВНИЗ
 	for (int j = 0; j < columns; ++j)
 	{
 		for (int i = 0; i < rows; ++i)
@@ -281,7 +279,7 @@ bool is_player_a_winner( char** my_arr, char customer_point, int quantity, int r
 		}
 	}
 
-	//ïðîâåðêà ïî äèàãîíàëè ÑËÅÂÀ ÍÀÏÐÀÂÎ  è  ÑÍÈÇÓ ÂÂÅÐÕ 
+	//проверка по диагонали СЛЕВА НАПРАВО и СНИЗУ ВВЕРХ
 	for (int j = 0; j < columns; ++j)
 	{
 		for (int i = rows - 1; i >= 0; --i)
@@ -294,7 +292,7 @@ bool is_player_a_winner( char** my_arr, char customer_point, int quantity, int r
 		}
 	}
 
-	return false;//  åñëè â ïðåäûäóùèõ ïðîâåðêàõ íå áûëî ïîëíûõ ïîñëåäîâàòåëüíîñòåé îäèíàêîâûõ çíà÷êîâ
+	return false;
 }
 
 bool is_arr_full( char** my_arr, int rows, int columns)
