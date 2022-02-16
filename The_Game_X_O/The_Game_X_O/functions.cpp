@@ -191,70 +191,50 @@ bool is_there_a_winner(char** my_arr, int quantity, int  rows, int columns)
 	for (int i = 0; i < rows; ++i)
 	{
 		for (int j = 0; j < columns; ++j)
-
+		{
 			for (int m = 1; m < quantity && j + m < rows; ++m)//цикл проверки одинаковых элементов подряд
 				if (my_arr[i][j] != '*' && my_arr[i][j] == my_arr[i][j + m]) ++count;
 
-		if (count == quantity - 1) return true;
-		count = 0;
+			if (count == quantity - 1) return true;
+			count = 0;
+		}
 	}
 	//проверка по вертикали
 	for (int i = 0; i < rows; ++i)
 	{
 		for (int j = 0; j < columns; ++j)
-
+		{
 			for (int m = 1; m < quantity && i + m < rows; ++m)//цикл проверки одинаковых элементов подряд
 				if (my_arr[i][j] != '*' && my_arr[i][j] == my_arr[i + m][j]) ++count;
 
-		if (count == quantity - 1) return true;
-		count = 0;
+			if (count == quantity - 1) return true;
+			count = 0;
+		}
 	}
 	//проверка по диагонали СЛЕВА НАПРАВО И СВЕРХУ ВНИЗ
 	for (int j = 0; j < columns; ++j)
 	{
 		for (int i = 0; i < rows; ++i)
-
-			for (int m = 1; m < quantity    &&  i + m < rows &&  j + m < columns; ++m)//цикл проверки одинаковых элементов подряд
+		{
+			for (int m = 1; m < quantity && i + m < rows && j + m < columns; ++m)//цикл проверки одинаковых элементов подряд
 				if (my_arr[i][j] != '*' && my_arr[i][j] == my_arr[i + m][j + m]) ++count;
 
-		if (count == quantity - 1) return true;
-		count = 0;
+			if (count == quantity - 1) return true;
+			count = 0;
+		}
 	}
 
 	//проверка по диагонали СЛЕВА НАПРАВО И СНИЗУ ВВЕРХ
 	for (int j = 0; j < columns; ++j)
 	{
 		for (int i = rows - 1; i >= 0; --i)
-
+		{
 			for (int m = 1; m < quantity && i - m >= 0 && j + m < columns; ++m)//цикл проверки одинаковых элементов подряд
 				if (my_arr[i][j] != '*' && my_arr[i][j] == my_arr[i - m][j + m]) ++count;
 
-		if (count == quantity - 1) return true;
-		count = 0;
-	}
-
-	//проверка по диагонали СПРАВА НАЛЕВО И СВЕРХУ ВНИЗ
-	for (int j = columns - 1; j >= 0; --j)
-	{
-		for (int i = 0; i < rows; ++i)
-
-			for (int m = 1; m < quantity && i + m < rows  && j - m >= 0; ++m)//цикл проверки одинаковых элементов подряд
-				if (my_arr[i][j] != '*' && my_arr[i][j] == my_arr[i + m][j - m]) ++count;
-
-		if (count == quantity - 1) return true;
-		count = 0;
-	}
-
-	//проверка по диагонали СПРАВА НАЛЕВО И СНИЗУ ВВЕРХ
-	for (int j = columns - 1; j >= 0; --j)
-	{
-		for (int i = rows - 1; i >= 0; --i)
-
-			for (int m = 1; m < quantity && i - m >= 0  && j - m >= 0; ++m)//цикл проверки одинаковых элементов подряд
-				if (my_arr[i][j] != '*' && my_arr[i][j] == my_arr[i - m][j - m]) ++count;
-		    
-		if (count == quantity - 1) return true;
-		count = 0;
+			if (count == quantity - 1) return true;
+			count = 0;
+		}
 	}
 
 	return false;//  если в предыдущих проверках не было полных последовательностей одинаковых значков
@@ -267,76 +247,50 @@ bool is_player_a_winner( char** my_arr, char customer_point, int quantity, int r
 	for (int i = 0; i < rows; ++i)
 	{
 		for (int j = 0; j < columns; ++j)
-
+		{
 			for (int m = 1; m < quantity && j + m < rows; ++m)//цикл проверки одинаковых элементов подряд
-				if (my_arr[i][j] == customer_point  && my_arr[i][j] == my_arr[i][j + m]) ++count;
+				if (my_arr[i][j] == customer_point && my_arr[i][j] == my_arr[i][j + m]) ++count;
 
-		if (count == quantity - 1) return true;
-
-		count = 0;
+			if (count == quantity - 1) return true;
+			count = 0;
+		}
 	}
 	//проверка по вертикали
 	for (int i = 0; i < rows; ++i)
 	{
 		for (int j = 0; j < columns; ++j)
-
+		{
 			for (int m = 1; m < quantity && i + m < rows; ++m)//цикл проверки одинаковых элементов подряд
-				if (my_arr[i][j] == customer_point  && my_arr[i][j] == my_arr[i + m][j]) ++count;
+				if (my_arr[i][j] == customer_point && my_arr[i][j] == my_arr[i + m][j]) ++count;
 
-		if (count == quantity - 1) return true;
-
-		count = 0;
+			if (count == quantity - 1) return true;
+			count = 0;
+		}
 	}
 	//проверка по диагонали СЛЕВА НАПРАВО  и СВЕРХУ ВНИЗ
 	for (int j = 0; j < columns; ++j)
 	{
 		for (int i = 0; i < rows; ++i)
-
+		{
 			for (int m = 1; m < quantity && i + m < rows && j + m < columns; ++m)//цикл проверки одинаковых элементов подряд
-				if (my_arr[i][j] == customer_point   &&  my_arr[i][j] == my_arr[i + m][j + m]) ++count;
+				if (my_arr[i][j] == customer_point && my_arr[i][j] == my_arr[i + m][j + m]) ++count;
 
-		if (count == quantity - 1) return true;
-
-		count = 0;
+			if (count == quantity - 1) return true;
+			count = 0;
+		}
 	}
 
 	//проверка по диагонали СЛЕВА НАПРАВО  и  СНИЗУ ВВЕРХ 
 	for (int j = 0; j < columns; ++j)
 	{
 		for (int i = rows - 1; i >= 0; --i)
-
-			for (int m = 1; m < quantity && i + m < rows && j + m < columns; ++m)//цикл проверки одинаковых элементов подряд
+		{
+			for (int m = 1; m < quantity && i - m >= 0 && j + m < columns; ++m)//цикл проверки одинаковых элементов подряд
 				if (my_arr[i][j] == customer_point && my_arr[i][j] == my_arr[i - m][j + m]) ++count;
 
-		if (count == quantity - 1) return true;
-
-		count = 0;
-	}
-
-	//проверка по диагонали СПРАВА НАЛЕВО И СВЕРХУ ВНИЗ
-	for (int j = columns- 1; j >= 0; --j)
-	{
-		for (int i = 0; i < rows; ++i)
-
-			for (int m = 1; m < quantity && i + m >= 0  &&  j - m >= 0; ++m)//цикл проверки одинаковых элементов подряд
-				if (my_arr[i][j] == customer_point  &&  my_arr[i][j] == my_arr[i + m][j - m]) ++count;
-
-		if (count == quantity - 1) return true;
-
-		count = 0;
-	}
-
-	//проверка по диагонали СПРАВА НАЛЕВО И СНИЗУ ВВЕРХ
-	for (int j = columns - 1; j >= 0; --j)
-	{
-		for (int i = rows - 1; i >= 0; --i)
-
-			for (int m = 1; m < quantity && i - m >= 0 && j - m >= 0; ++m)//цикл проверки одинаковых элементов подряд
-				if (my_arr[i][j] == customer_point && my_arr[i][j] == my_arr[i - m][j - m]) ++count;
-
-		if (count == quantity - 1) return true;
-
-		count = 0;
+			if (count == quantity - 1) return true;
+			count = 0;
+		}
 	}
 
 	return false;//  если в предыдущих проверках не было полных последовательностей одинаковых значков

@@ -23,9 +23,13 @@ int main()
 
 	int points_for_winning;
 
-	int row = enter_rows();
+	int row;
 
-	int column = enter_columns();
+	int column;
+
+	row = enter_rows();
+
+	column = enter_columns();
 
 	points_for_winning = enter_quantity_of_points(row, column);
 
@@ -70,7 +74,7 @@ int main()
 		{
 			std::cout << "you are a looser." << std::endl;
 		}
-		else if (is_arr_full(arr, row, column))
+		else 
 		{
 			std::cout << "drawn game." << std::endl;
 		}
