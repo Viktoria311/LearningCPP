@@ -80,7 +80,7 @@ int enter_quantity_of_points(int rows, int columns)
 	return points_for_wining;
 }
 
-void init_vec(std::vector<std::vector<char>>& my_vec, int x, int y)
+void init_field(std::vector<std::vector<char>>& my_vec, int x, int y)
 {
 	for (int i = 0; i < x; ++i)
 		for (int j = 0; j < y; ++j)
@@ -90,14 +90,14 @@ void init_vec(std::vector<std::vector<char>>& my_vec, int x, int y)
 
 void show_field(std::vector<std::vector<char>>& my_vec, int x, int y)
 {
-	//верхушка поля
+	//head of the field
 	std::cout << '\t';
 	for (int i = 1; i <= y; ++i)
 		std::cout << i << '\t';
 
 	std::cout << std::endl << std::endl;
 
-	//основное тело поля
+	//main body of the field
 	for (int i = 1; i <= x; ++i)
 	{
 		std::cout << i << " ";
@@ -174,6 +174,30 @@ void machine_steps(std::vector<std::vector<char>>& my_vec, char machine_point, i
 	my_vec[row_of_machine_step][column_of_machine_step] = machine_point;
 }
 
+void step(std::vector<std::vector<char>>& my_vec, char player_point, int number_in_the_queue, int rows, int columns, step_t step_player, step_t step_machine)
+{
+	if (number_in_the_queue == 1 && player_point == 'X')
+	{
+		//PLAYER STEP
+		step_player(my_vec, player_point, rows, columns);
+	}
+	else if (number_in_the_queue == 1 && player_point == 'O')
+	{
+		// MACHINE STEP
+		step_machine(my_vec, 'X', rows, columns);
+	}
+	else if (number_in_the_queue == 2 && player_point == 'X')
+	{
+		//MACHINE STEP
+		step_machine(my_vec, 'O', rows, columns);
+	}
+	else if (number_in_the_queue == 2 && player_point == 'O')
+	{
+		// PLAYER STEP
+		step_player(my_vec, player_point, rows, columns);
+	}
+}
+
 bool is_there_a_winner(std::vector<std::vector<char>>& my_vec, int quantity, int  rows, int columns)
 {
 	int count = 0;
@@ -182,7 +206,7 @@ bool is_there_a_winner(std::vector<std::vector<char>>& my_vec, int quantity, int
 	{
 		for (int j = 0; j < columns; ++j)
 		{
-			for (int m = 1; m < quantity && j + m < rows; ++m)//цикл проверки одинаковых элементов подряд
+			for (int m = 1; m < quantity && j + m < rows; ++m)//loop of the check  the same elements together successively 
 				if (my_vec[i][j] != '*' && my_vec[i][j] == my_vec[i][j + m]) ++count;
 
 			if (count == quantity - 1) return true;
@@ -228,6 +252,19 @@ bool is_there_a_winner(std::vector<std::vector<char>>& my_vec, int quantity, int
 	}
 
 	return false;//  если в предыдущих проверках не было полных последовательностей одинаковых значков
+}
+
+bool is_field_full(std::vector<std::vector<char>>& my_vec, int rows, int columns)
+{
+	for (int i = 0; i < rows; ++i)
+		for (int j = 0; j < columns; ++j)
+			if (my_vec[i][j] == '*') return false;
+	return true;
+}
+
+bool is_it_the_end(std::vector<std::vector<char>>& my_vec, int quantity, int  rows, int columns, is_there_a_winner_t f_is_there_a_winner, is_field_full_t f_is_field_full)
+{
+	return (f_is_there_a_winner(my_vec, quantity, rows, columns) || f_is_field_full(my_vec, rows, columns));
 }
 
 bool is_player_a_winner(std::vector<std::vector<char>>& my_vec, char customer_point, int quantity, int rows, int columns)
@@ -283,14 +320,22 @@ bool is_player_a_winner(std::vector<std::vector<char>>& my_vec, char customer_po
 			count = 0;
 		}
 	}
-
 	return false;
 }
 
-bool is_arr_full(std::vector<std::vector<char>>& my_vec, int rows, int columns)
+
+void show_the_results(std::vector<std::vector<char>>& my_vec, char player_p, char machine_p, int quantity, int  rows, int columns, is_player_a_winner_t f_is_player_a_winner)
 {
-	for (int i = 0; i < rows; ++i)
-		for (int j = 0; j < columns; ++j)
-			if (my_vec[i][j] == '*') return false;
-	return true;
+	if (f_is_player_a_winner(my_vec, player_p, quantity, rows, columns))
+	{
+		std::cout << " you are a winner!!! Congratulations!" << std::endl;
+	}
+	else if (f_is_player_a_winner(my_vec, machine_p, quantity, rows, columns))
+	{
+		std::cout << "you are a looser." << std::endl;
+	}
+	else
+	{
+		std::cout << "drawn game." << std::endl;
+	}
 }
