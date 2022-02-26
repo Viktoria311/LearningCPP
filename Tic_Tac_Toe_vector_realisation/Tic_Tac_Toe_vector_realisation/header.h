@@ -2,6 +2,7 @@
 #define HEADER_H_
 
 #include <vector>
+#include <string>
 
 typedef int (*enter_quantity_of_field_parameter_t)();
 typedef int (*enter_quantity_of_points_t)(int, int);

@@ -1,5 +1,4 @@
 #include <iostream>
-#include <cctype>
 #include <vector>
 #include <string>
 #include "header.h"
@@ -29,8 +28,6 @@ int main()
 
 	game(field, points_for_winning, row, column, show_field, player_1, player_2, player_steps, machine_steps,
 		 step, is_there_a_winner, is_it_the_end, is_field_full);
-
-	show_field(field, row, column);
 
 	show_the_results(field, player_point, machine_point, points_for_winning, row, column, is_player_a_winner);
 

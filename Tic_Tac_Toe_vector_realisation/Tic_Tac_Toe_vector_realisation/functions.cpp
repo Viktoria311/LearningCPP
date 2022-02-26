@@ -1,6 +1,8 @@
 #include <iostream>
 #include <cctype>
 #include <cstdlib>
+#include <vector>
+#include <string>
 #include "header.h"
 
 void choose_a_point(char& customer_point, char& computer_point)
@@ -218,16 +220,19 @@ void game(std::vector<std::vector<char>>& my_field, int win_quantity, int  field
 {
 	do
 	{
+		if (player1.compare("customer") == 0) f_show_field(my_field, field_rows, field_columns);
 
 		f_common_step(my_field, 'X', field_rows, field_columns, player1, player_step, machine_step);
 
-		f_show_field(my_field, field_rows, field_columns);
+		if (player1.compare("bot") == 0) f_show_field(my_field, field_rows, field_columns);
 
 		if (f_is_there_a_winner(my_field, win_quantity, field_rows, field_columns)) break;
 
 		f_common_step(my_field, 'O', field_rows, field_columns, player2, player_step, machine_step);
 
 	} while (!f_is_it_the_end(my_field, win_quantity, field_rows, field_columns, f_is_there_a_winner, f_is_field_full));
+
+	f_show_field(my_field, field_rows, field_columns);
 }
 
 bool is_there_a_winner(std::vector<std::vector<char>>& my_vec, int quantity, int  rows, int columns)
