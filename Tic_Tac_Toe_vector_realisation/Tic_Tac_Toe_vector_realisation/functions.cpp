@@ -88,20 +88,20 @@ void init_field(std::vector<std::vector<char>>& my_vec, int x, int y)
 
 }
 
-void init_players(char customer_point, std::string& player1, std::string& player2 )
+void init_players(char customer_point, std::string& player1, std::string& player2)
 {
 	switch (customer_point)
 	{
-		case 'X': player1 = "customer"; player2 = "bot"; break;
+	case 'X': player1 = "customer"; player2 = "bot"; break;
 
-		case 'O': player1 = "bot"; player2 = "customer"; break;
+	case 'O': player1 = "bot"; player2 = "customer"; break;
 	}
 }
 
-void init_settings( int& rows, int& columns, enter_quantity_of_field_parameter_t f_enter_rows, enter_quantity_of_field_parameter_t f_enter_columns,
-											  int& quantity, enter_quantity_of_points_t f_enter_quantity_of_points,
-											  char& customer_point, char& machine_point, choose_a_point_t f_choose_a_point,
-											  std::string& player1, std::string& player2, init_players_t f_init_players )
+void init_settings(int& rows, int& columns, enter_quantity_of_field_parameter_t f_enter_rows, enter_quantity_of_field_parameter_t f_enter_columns,
+					int& quantity, enter_quantity_of_points_t f_enter_quantity_of_points,
+					char& customer_point, char& machine_point, choose_a_point_t f_choose_a_point,
+					std::string& player1, std::string& player2, init_players_t f_init_players)
 {
 	rows = f_enter_rows();
 
@@ -201,23 +201,24 @@ void machine_steps(std::vector<std::vector<char>>& my_vec, char machine_point, i
 	my_vec[row_of_machine_step][column_of_machine_step] = machine_point;
 }
 
-void step(std::vector<std::vector<char>>& vec, char point, int field_rows, int field_columns, 
-		  std::string player, step_t step_player, step_t step_machine)
-{ 
-	if (player.compare("customer") == 0) 
+void step(std::vector<std::vector<char>>& vec, char point, int field_rows, int field_columns,
+	      std::string player, step_t step_player, step_t step_machine)
+{
+	if (player.compare("customer") == 0)
 		step_player(vec, point, field_rows, field_columns);
-	else 
+	else
 		step_machine(vec, point, field_rows, field_columns);
-	
+
 }
 
-void game(std::vector<std::vector<char>>& my_field, int win_quantity, int  field_rows, int field_columns,  
-		  show_field_t f_show_field, std::string player1, std::string player2, step_t player_step, step_t machine_step, 
-		  common_step_t f_common_step, is_there_a_winner_t f_is_there_a_winner, is_it_the_end_t f_is_it_the_end,
-		  is_field_full_t f_is_field_full )
+void game(std::vector<std::vector<char>>& my_field, int win_quantity, int  field_rows, int field_columns,
+	show_field_t f_show_field, std::string player1, std::string player2, step_t player_step, step_t machine_step,
+	common_step_t f_common_step, is_there_a_winner_t f_is_there_a_winner, is_it_the_end_t f_is_it_the_end,
+	is_field_full_t f_is_field_full)
 {
 	do
 	{
+
 		f_common_step(my_field, 'X', field_rows, field_columns, player1, player_step, machine_step);
 
 		f_show_field(my_field, field_rows, field_columns);
@@ -282,7 +283,7 @@ bool is_there_a_winner(std::vector<std::vector<char>>& my_vec, int quantity, int
 		}
 	}
 
-	return false;//if there were no complete sequences of identical icons in previous checks
+	return false;// if there were no complete sequences of identical icons in previous checks
 }
 
 bool is_field_full(std::vector<std::vector<char>>& my_vec, int rows, int columns)
@@ -331,7 +332,7 @@ bool is_player_a_winner(std::vector<std::vector<char>>& my_vec, char customer_po
 	{
 		for (int i = 0; i < rows; ++i)
 		{
-			for (int m = 1; m < quantity && i + m < rows && j + m < columns; ++m)//a loop of checking identical elements standing sequentially
+			for (int m = 1; m < quantity && i + m < rows && j + m < columns; ++m)//цикл проверки одинаковых элементов подряд
 				if (my_vec[i][j] == customer_point && my_vec[i][j] == my_vec[i + m][j + m]) ++count;
 
 			if (count == quantity - 1) return true;
@@ -344,7 +345,7 @@ bool is_player_a_winner(std::vector<std::vector<char>>& my_vec, char customer_po
 	{
 		for (int i = rows - 1; i >= 0; --i)
 		{
-			for (int m = 1; m < quantity && i - m >= 0 && j + m < columns; ++m)
+			for (int m = 1; m < quantity && i - m >= 0 && j + m < columns; ++m)//a loop of checking identical elements standing sequentially
 				if (my_vec[i][j] == customer_point && my_vec[i][j] == my_vec[i - m][j + m]) ++count;
 
 			if (count == quantity - 1) return true;
