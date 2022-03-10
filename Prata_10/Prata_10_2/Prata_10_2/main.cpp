@@ -18,7 +18,7 @@ int main()
 	people[1] = Person(last_name);
 	people[2] = Person();
 
-	Show(people, &Person::Show, &Person::FormalShow);
+	Show(people);
 
 	delete[] first_name;
 

@@ -19,6 +19,4 @@ class Person
 	   static const int Limit();
 };
 
-typedef void (Person::*Show_t)() const;
-
 #endif

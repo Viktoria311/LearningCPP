@@ -17,12 +17,12 @@ void EnterLastName(std::string& last_name_)
 	getline(std::cin, last_name_);
 }
 
-void Show(std::vector<Person>& vec, Show_t ShowF1, Show_t ShowF2)
+void Show(std::vector<Person>& vec)
 {
 	for (int i = 0; i < (int)vec.size(); ++i)
 	{
 		std::cout << "person " << i + 1 << ':' << std::endl;
-		(vec[i].*ShowF1)();
-		(vec[i].*ShowF2)();
+		vec[i].Show();
+		vec[i].FormalShow();
 	}
 }
