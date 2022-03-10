@@ -38,7 +38,7 @@ double EnterSum()
 	return sum;
 }
 
-void OfferToWithdrawMoney(BancAccount& my_acc, Show_t ShowF,EnterSum_t EnterSumF, CanWithdrawMoney_t CanWithdrawMoneyF, WithdrawMoney_t WithdrawMoneyF, IsEmpty_t IsEmptyF)
+void OfferToWithdrawMoney(BancAccount& my_acc)
 {
 	//this function offers to withdraw money
 	bool want_withdraw;
@@ -48,7 +48,7 @@ void OfferToWithdrawMoney(BancAccount& my_acc, Show_t ShowF,EnterSum_t EnterSumF
 	std::cin.ignore(100, '\n');
 	do
 	{
-		if (  (my_acc.*IsEmptyF)()  )
+		if (  my_acc.IsEmpty()  )
 		{
 			std::cout << "Sorry, but your account is empty" << std::endl;
 			break;
@@ -56,30 +56,31 @@ void OfferToWithdrawMoney(BancAccount& my_acc, Show_t ShowF,EnterSum_t EnterSumF
 		if (want_withdraw)
 		{
 			std::cout << "Enter a sum which you want to withdraw: ";
-			double sum_to_withdraw = EnterSumF();
-			if ((my_acc.*IsEmptyF)())
+			double sum_to_withdraw = EnterSum();
+			if (my_acc.IsEmpty())
 			{
 				std::cout << "Sorry, but your account is empty" << std::endl;
 				break;
 			}
-			else if ((my_acc.*CanWithdrawMoneyF)(sum_to_withdraw))
+			else if (my_acc.CanWithdrawMoney(sum_to_withdraw))
 			{
-				(my_acc.*WithdrawMoneyF)(sum_to_withdraw);
-				(my_acc.*ShowF)();
+				my_acc.WithdrawMoney(sum_to_withdraw);
+				my_acc.ShowBalance();
 			}
 			else
 			{
 				std::cout << "Sorry, but your account has insufficient funds. Try to withdray lesser amount" << std::endl;
-				(my_acc.*ShowF)();
+				my_acc.ShowBalance();
 			}
 
 			std::cout << "Do you want to withdraw money again? 1 - yes, 0 - no" << std::endl;
 			std::cin >> want_withdraw;
 		}
-	} while (  !((my_acc.*IsEmptyF)() ) && want_withdraw);
+	} while (  !(my_acc.IsEmpty() ) && want_withdraw);
 
 }
-void OfferToPutMoney(BancAccount& my_acc, Show_t ShowF,EnterSum_t EnterSumF, PutMoney_t PutMoneyF)
+
+void OfferToPutMoney(BancAccount& my_acc)
 {
 	//this function offers to put  money
 	bool want_put_money;
@@ -90,9 +91,9 @@ void OfferToPutMoney(BancAccount& my_acc, Show_t ShowF,EnterSum_t EnterSumF, Put
 	do
 	{
 		std::cout << "Enter a sum which you want to put: ";
-		double sum_to_put = EnterSumF();
-		(my_acc.*PutMoneyF)(sum_to_put);
-		(my_acc.*ShowF)();
+		double sum_to_put = EnterSum();
+		my_acc.PutMoney(sum_to_put);
+		my_acc.ShowBalance();
 		std::cout << "Do you want to put money again? 1 - yes, 0 - no" << std::endl;
 		std::cin >> want_put_money;
 	} while (want_put_money);

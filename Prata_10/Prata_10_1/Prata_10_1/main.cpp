@@ -12,10 +12,10 @@ int main()
 	my_account.ShowBancAccount();
 
 	//this function offers to withdraw money
-	OfferToWithdrawMoney(my_account, &BancAccount::ShowBalance, EnterSum, &BancAccount::CanWithdrawMoney, &BancAccount::WithdrawMoney, &BancAccount::IsEmpty);
+	OfferToWithdrawMoney(my_account);
 
 	//this function offers to put money
-	OfferToPutMoney(my_account, &BancAccount::ShowBalance, EnterSum, &BancAccount::PutMoney);
+	OfferToPutMoney(my_account);
 
 	return 0;
 } 

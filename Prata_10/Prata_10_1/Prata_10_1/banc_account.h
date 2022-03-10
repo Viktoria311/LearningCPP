@@ -19,10 +19,5 @@ class BancAccount
 		bool IsEmpty() const;
 		bool CanWithdrawMoney(double sum);
 };
-typedef void (BancAccount::*Show_t)() const;
-typedef bool (BancAccount::*IsEmpty_t)() const;
-typedef void (BancAccount::*WithdrawMoney_t)(double sum);
-typedef void (BancAccount::*PutMoney_t)(double sum);
-typedef bool (BancAccount::*CanWithdrawMoney_t)(double sum);
 
 #endif
