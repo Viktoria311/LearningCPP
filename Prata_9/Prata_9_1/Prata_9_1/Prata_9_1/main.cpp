@@ -20,8 +20,8 @@ int main()
 
 	for (int i = 0; i < quantity && setgolf(*(arr + i)) != 0; ++i);
 
-	 if (quantity == 1) new_function(arr, change_handicap, showgolf);
-	else new_function(arr, change_handicap, showgolf, quantity);
+	 if (quantity == 1) new_function(arr);
+	else new_function(arr, quantity);
 
 	delete[] arr;
 	std::cout << "Bye!\n";

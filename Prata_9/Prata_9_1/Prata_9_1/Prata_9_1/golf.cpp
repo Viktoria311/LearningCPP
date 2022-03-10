@@ -36,7 +36,7 @@ void showgolf(const golf& g)
 	std::cout << "The name is " << g.fullname << std::endl;
 	std::cout << "the handicap is " << g.handicap << std::endl;
 }
-void new_function(golf* gg, void (*func1)(golf&, int), void (*func2)(const golf&))
+void new_function(golf* gg)
 {
 	bool want;
 
@@ -46,18 +46,17 @@ void new_function(golf* gg, void (*func1)(golf&, int), void (*func2)(const golf&
 	std::cin >> want;
 	if (want)
 	{
-		
 		std::cout << "Enter a number on which you want to change a handicap: ";
 		while (!(std::cin >> new_handicap))  continue;
-		func1(*gg, new_handicap);
+		change_handicap(*gg, new_handicap);
 		std::cout << "Do you want to look at the changing struct? 1 - yes, 0 - no " << std::endl;
 		std::cin >> want;
-		if (want) func2(*gg);
+		if (want) showgolf(*gg);
 	}
 	else std::cout << "Okey, we will not change its handicap." << std::endl;
 }
 
-void new_function(golf* gg, void (*func1)(golf&, int), void (*func2)(const golf&), int quantity_of_elements)
+void new_function(golf* gg, int quantity_of_elements)
 {
 	bool want;
 
@@ -71,11 +70,9 @@ void new_function(golf* gg, void (*func1)(golf&, int), void (*func2)(const golf&
 
 		if (want)
 		{
-			
 			std::cout << "What struct in the array do you want to change?\n";
 			std::cout << "Enter a number of a struct in the array which you want to change from 1 to "
 				      << quantity_of_elements << ":  ";
-
 
 			while (!(std::cin >> number_of_the_struct) ||
 				number_of_the_struct > quantity_of_elements ||
@@ -99,10 +96,10 @@ void new_function(golf* gg, void (*func1)(golf&, int), void (*func2)(const golf&
 				std::cout << "Try again to enter a handicap: ";
 			}
 
-			func1(*(gg + number_of_the_struct - 1), new_handicap);
+			change_handicap(*(gg + number_of_the_struct - 1), new_handicap);
 			std::cout << "Do you want to look at the changing struct? 1 - yes, 0 - no " << std::endl;
 			std::cin >> want;
-			if (want) func2(*(gg + number_of_the_struct - 1));
+			if (want) showgolf(*(gg + number_of_the_struct - 1));
 			std::cout << "Do you want to change a handicap of another struct? 1 - yes, 0 - no ";
 			std::cin >> want;
 		}
