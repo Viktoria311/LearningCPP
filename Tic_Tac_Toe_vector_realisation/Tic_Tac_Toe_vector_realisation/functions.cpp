@@ -100,20 +100,17 @@ void init_players(char customer_point, std::string& player1, std::string& player
 	}
 }
 
-void init_settings(int& rows, int& columns, enter_quantity_of_field_parameter_t f_enter_rows, enter_quantity_of_field_parameter_t f_enter_columns,
-					int& quantity, enter_quantity_of_points_t f_enter_quantity_of_points,
-					char& customer_point, char& machine_point, choose_a_point_t f_choose_a_point,
-					std::string& player1, std::string& player2, init_players_t f_init_players)
+void init_settings(int& rows, int& columns, int& quantity, char& customer_point, char& machine_point, std::string& player1, std::string& player2)
 {
-	rows = f_enter_rows();
+	rows = enter_rows();
 
-	columns = f_enter_columns();
+	columns = enter_columns();
 
-	quantity = f_enter_quantity_of_points(rows, columns);
+	quantity = enter_quantity_of_points(rows, columns);
 
-	f_choose_a_point(customer_point, machine_point);
+	choose_a_point(customer_point, machine_point);
 
-	f_init_players(customer_point, player1, player2);
+	init_players(customer_point, player1, player2);
 
 }
 
@@ -203,36 +200,32 @@ void machine_steps(std::vector<std::vector<char>>& my_vec, char machine_point, i
 	my_vec[row_of_machine_step][column_of_machine_step] = machine_point;
 }
 
-void step(std::vector<std::vector<char>>& vec, char point, int field_rows, int field_columns,
-	      std::string player, step_t step_player, step_t step_machine)
+void step(std::vector<std::vector<char>>& vec, char point, int field_rows, int field_columns, std::string player)
 {
 	if (player.compare("customer") == 0)
-		step_player(vec, point, field_rows, field_columns);
+		player_steps(vec, point, field_rows, field_columns);
 	else
-		step_machine(vec, point, field_rows, field_columns);
+		machine_steps(vec, point, field_rows, field_columns);
 
 }
 
-void game(std::vector<std::vector<char>>& my_field, int win_quantity, int  field_rows, int field_columns,
-	show_field_t f_show_field, std::string player1, std::string player2, step_t player_step, step_t machine_step,
-	common_step_t f_common_step, is_there_a_winner_t f_is_there_a_winner, is_it_the_end_t f_is_it_the_end,
-	is_field_full_t f_is_field_full)
+void game(std::vector<std::vector<char>>& my_field, int win_quantity, int field_rows, int field_columns, std::string player1, std::string player2)
 {
 	do
 	{
-		if (player1.compare("customer") == 0) f_show_field(my_field, field_rows, field_columns);
+		if (player1.compare("customer") == 0) show_field(my_field, field_rows, field_columns);
 
-		f_common_step(my_field, 'X', field_rows, field_columns, player1, player_step, machine_step);
+		step(my_field, 'X', field_rows, field_columns, player1);
 
-		if (player1.compare("bot") == 0) f_show_field(my_field, field_rows, field_columns);
+		if (player1.compare("bot") == 0) show_field(my_field, field_rows, field_columns);
 
-		if (f_is_there_a_winner(my_field, win_quantity, field_rows, field_columns)) break;
+		if (is_there_a_winner(my_field, win_quantity, field_rows, field_columns)) break;
 
-		f_common_step(my_field, 'O', field_rows, field_columns, player2, player_step, machine_step);
+		step(my_field, 'O', field_rows, field_columns, player2);
 
-	} while (!f_is_it_the_end(my_field, win_quantity, field_rows, field_columns, f_is_there_a_winner, f_is_field_full));
+	} while (! is_it_the_end(my_field, win_quantity, field_rows, field_columns));
 
-	f_show_field(my_field, field_rows, field_columns);
+	show_field(my_field, field_rows, field_columns);
 }
 
 bool is_there_a_winner(std::vector<std::vector<char>>& my_vec, int quantity, int  rows, int columns)
@@ -299,9 +292,9 @@ bool is_field_full(std::vector<std::vector<char>>& my_vec, int rows, int columns
 	return true;
 }
 
-bool is_it_the_end(std::vector<std::vector<char>>& my_vec, int quantity, int  rows, int columns, is_there_a_winner_t f_is_there_a_winner, is_field_full_t f_is_field_full)
+bool is_it_the_end(std::vector<std::vector<char>>& my_vec, int quantity, int  rows, int columns)
 {
-	return (f_is_there_a_winner(my_vec, quantity, rows, columns) || f_is_field_full(my_vec, rows, columns));
+	return (is_there_a_winner(my_vec, quantity, rows, columns) || is_field_full(my_vec, rows, columns));
 }
 
 bool is_player_a_winner(std::vector<std::vector<char>>& my_vec, char customer_point, int quantity, int rows, int columns)
@@ -360,14 +353,13 @@ bool is_player_a_winner(std::vector<std::vector<char>>& my_vec, char customer_po
 	return false;
 }
 
-
-void show_the_results(std::vector<std::vector<char>>& my_vec, char player_p, char machine_p, int quantity, int  rows, int columns, is_player_a_winner_t f_is_player_a_winner)
+void show_the_results(std::vector<std::vector<char>>& my_vec, char player_p, char machine_p, int quantity, int  rows, int columns)
 {
-	if (f_is_player_a_winner(my_vec, player_p, quantity, rows, columns))
+	if (is_player_a_winner(my_vec, player_p, quantity, rows, columns))
 	{
 		std::cout << " you are a winner!!! Congratulations!" << std::endl;
 	}
-	else if (f_is_player_a_winner(my_vec, machine_p, quantity, rows, columns))
+	else if (is_player_a_winner(my_vec, machine_p, quantity, rows, columns))
 	{
 		std::cout << "you are a looser." << std::endl;
 	}
