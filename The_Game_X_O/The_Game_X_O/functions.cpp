@@ -117,7 +117,7 @@ char** create_arr(int rows, int columns)
 	return my_arr;
 }
 
-void player_steps(char** my_arr, char player_point, int rows, int columns)
+void player_steps(char** my_arr, char player_point_, int rows, int columns)
 {
 	int row_of_player_step;
 
@@ -164,10 +164,10 @@ void player_steps(char** my_arr, char player_point, int rows, int columns)
 		++count;
 	} while (my_arr[row_of_player_step][column_of_player_step] != '*');
 	
-	my_arr[row_of_player_step][column_of_player_step] = player_point;
+	my_arr[row_of_player_step][column_of_player_step] = player_point_;
 }
 
-void machine_steps(char** my_arr, char machine_point, int rows, int columns)
+void machine_steps(char** my_arr, char machine_point_, int rows, int columns)
 {
 	int row_of_machine_step;
 
@@ -179,7 +179,7 @@ void machine_steps(char** my_arr, char machine_point, int rows, int columns)
 		column_of_machine_step = rand() % columns;
     } while(my_arr[row_of_machine_step][column_of_machine_step] != '*');
 
-	my_arr[row_of_machine_step][column_of_machine_step] = machine_point;
+	my_arr[row_of_machine_step][column_of_machine_step] = machine_point_;
 }
 
 bool is_there_a_winner(char** my_arr, int quantity, int  rows, int columns)
@@ -301,6 +301,46 @@ bool is_arr_full( char** my_arr, int rows, int columns)
 		for (int j = 0; j < columns; ++j)
 			if (my_arr[i][j] == '*') return false;
 	return true;
+}
+
+void game(char** my_arr_, int rows_, int columns_, int quantity_, char player_point_, char machine_point_)
+{
+	if (player_point_ == 'X')
+	{
+		do
+		{
+			show_field(my_arr_, rows_, columns_);
+			player_steps(my_arr_, quantity_, rows_, columns_);
+			if (is_there_a_winner(my_arr_, quantity_, rows_, columns_)) break;
+			machine_steps(my_arr_, machine_point_, rows_, columns_);
+		} while (!is_there_a_winner(my_arr_, quantity_, rows_, columns_) && !is_arr_full(my_arr_, rows_, columns_));
+	}
+	else
+	{
+		do
+		{
+			machine_steps(my_arr_, machine_point_, rows_, columns_);
+			show_field(my_arr_, rows_, columns_);
+			if (is_there_a_winner(my_arr_, quantity_, rows_, columns_)) break;
+			player_steps(my_arr_, player_point_, rows_, columns_);
+		} while (!is_there_a_winner(my_arr_, quantity_, rows_, columns_) && !is_arr_full(my_arr_, rows_, columns_));
+	}
+}
+
+void show_results(char** my_arr, int rows, int columns, int quantity, char player_point_, char machine_point_)
+{
+	if (is_player_a_winner(my_arr, player_point_, quantity, rows, columns))
+	{
+		std::cout << " you are a winner!!! Congratulations!" << std::endl;
+	}
+	else if (is_player_a_winner(my_arr, machine_point_, quantity, rows, columns))//если машина победила
+	{
+		std::cout << "you are a looser." << std::endl;
+	}
+	else
+	{
+		std::cout << "drawn game." << std::endl;
+	}
 }
 
 void delete_arr(char** my_arr, int n)
