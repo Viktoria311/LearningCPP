@@ -12,6 +12,23 @@ bool HaveName(const Golf& g)
 	else return false;
 }
 
+void EnterName(char* fullname_, int size_)
+{
+	std::cout << "Enter a name: ";
+	std::cin.getline(fullname_, size_);
+}
+
+void EnterHandicap(int& handicap_)
+{
+	std::cout << "Enter a handicap: ";
+	while (!(std::cin >> handicap_))
+	{
+		std::cin.clear();
+		std::cin.ignore(100, '\n');
+		std::cout << "Try again to enter a handicap: ";
+	}
+}
+
 Golf Func(int size)
 {
 	bool want_constructor;
@@ -33,38 +50,18 @@ Golf Func(int size)
 
 		int handicap;
 		//оба ввести
-		std::cout << "Do you want to enter a name? 1 - yes, 0 - no" << std::endl;
+		std::cout << "Do you want to enter a name and a handicap? 1 - yes, 0 - no" << std::endl;
 		std::cin >> want_both;
 		if (want_both)
 		{
-			std::cout << "Enter a name: ";
-			std::cin.getline(fullname, size);
-
-			std::cout << "Enter a handicap: ";
-			while (!(std::cin >> handicap))
-			{
-				std::cin.clear();
-				std::cin.ignore(100, '\n');
-				std::cout << "Try again to enter a handicap: ";
-			}
+			EnterName(fullname, size);
+			EnterHandicap(handicap);
 		} else
 		{
 			std::cout << "Do you want to enter a name or a handicap? 1 - name, 0 - handicap" << std::endl;
 			std::cin >> want_name;
-			if (want_name)
-			{
-				std::cout << "Enter a name: ";
-				std::cin.getline(fullname, size);
-			} else
-			{
-				std::cout << "Enter a handicap: ";
-				while (!(std::cin >> handicap))
-				{
-					std::cin.clear();
-					std::cin.ignore(100, '\n');
-					std::cout << "Try again to enter a handicap: ";
-				}
-			}
+			if (want_name) EnterName(fullname, size);
+			else EnterHandicap(handicap);
 		}
 
 		if (want_both)
