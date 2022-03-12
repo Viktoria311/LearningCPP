@@ -14,8 +14,14 @@ namespace SALES
 		double average;
 		double max;
 		double min;
+		void SetSales(const std::vector<double>& vec);
+		void SetSales();
+		void SetMaxMin(const std::vector<double>& vec);
+		void SetMaxMin(const std::array<double, QUARTERS>& arr);
+		void SumAverage(const std::vector<double>& vec);
+		void SumAverage(const std::array<double, QUARTERS>& arr);
 	public:
-		Sales(std::vector<double>& vec);
+		Sales(const std::vector<double>& vec);
 		Sales();
 	   ~Sales();
 	    void ShowSales() const;

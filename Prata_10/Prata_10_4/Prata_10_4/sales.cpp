@@ -5,29 +5,12 @@
 
 namespace SALES
 {
-	Sales::Sales(std::vector<double>& vec)
+	void Sales::SetSales(const std::vector<double>& vec)
 	{
-		if (vec.size() == QUARTERS)
+		if (vec.empty())
 		{
-			double min_ = vec[0];
-
-			double max_ = vec[0];
-
-			double average_ = vec[0];
-			
-			for (int i = 0; i < vec.size(); ++i)
-			{
-				sales[i] = vec[i];
-				average_ += vec[i];
-				if (max_ < vec[i]) max_ = vec[i];
-				if (min_ > vec[i]) min_ = vec[i];
-			}
-			min = min_;
-			max = max_;
-			average = average_ / sales.size();
-		} else if (vec.empty())
-		{
-			max = min = average = sales[3] = sales[2] = sales[1] = sales[0] = 0.0;
+			for (int i = 0; i < QUARTERS; ++i)
+				sales[i] = 0.0;
 		} else
 		{
 			for (int i = 0; i < QUARTERS && i < vec.size(); ++i)
@@ -36,26 +19,10 @@ namespace SALES
 			if (vec.size() < QUARTERS)
 				for (int i = vec.size(); i < QUARTERS; ++i)
 					sales[i] = 0.0;
-
-			double min_ = vec[0];
-
-			double max_ = vec[0];
-
-			double average_ = vec[0];
-
-			for (int i = 1; i < vec.size(); ++i)
-			{
-				average += vec.at(i);
-				if (max_ < vec[i]) max_ = vec[i];
-				if (min_ > vec[i]) min_ = vec[i];
-			}
-			min = min_;
-			max = max_;
-			average = average_ / sales.size();
 		}
 	}
 
-	Sales::Sales()
+	void Sales::SetSales()
 	{
 		std::cout << "Enter sales for " << QUARTERS << " quarters:" << std::endl;
 		for (int i = 0; i < QUARTERS; ++i)
@@ -67,21 +34,70 @@ namespace SALES
 				std::cout << "Try again to enter sales of " << i + 1 << " quarter: ";
 			}
 		}
-		double min_ = sales[0];
+	}
 
-		double max_ = sales[0];
+	void Sales::SetMaxMin(const std::vector<double>& vec)
+	{
+		if (vec.empty()) max = min = 0.0;
+		else
+		{
+			min = vec[0];
 
-		double average_ = sales[0];
+			max = vec[0];
+
+			for (int i = 1; i < vec.size(); ++i)
+			{
+				if (max < vec[i]) max = vec[i];
+				if (min > vec[i]) min = vec[i];
+			}
+		}
+	}
+
+	void Sales::SetMaxMin(const std::array<double, QUARTERS>& arr)
+	{
+		min = sales[0];
+
+		max = sales[0];
 
 		for (int i = 1; i < sales.size(); ++i)
 		{
-			if (min > sales[i]) min_ = sales[i];
-			if (max < sales[i]) max_ = sales[i];
-			average_ += sales[i];
+			if (min > sales[i]) min = sales[i];
+			if (max < sales[i]) max = sales[i];
 		}
-		min = min_;
-		max = max_;
-		average = average_ / sales.size();
+	}
+	void Sales::SumAverage(const std::vector<double>& vec)
+	{
+
+		average = 0.0;
+
+		if (!vec.empty())
+		{
+			for (int i = 0; i < vec.size(); ++i)
+				average += vec[i];
+			average /= vec.size();
+		}
+	}
+	void Sales::SumAverage(const std::array<double, QUARTERS>& arr)
+	{
+		average = 0.0;
+
+		for (int i = 0; i < arr.size(); ++i)
+				average += arr[i];
+		average /= arr.size();
+	
+	}
+	Sales::Sales(const std::vector<double>& vec)
+	{
+		SetSales(vec);
+		SetMaxMin(vec);
+		SumAverage(vec);
+	}
+
+	Sales::Sales()
+	{
+		SetSales();
+		SetMaxMin(sales);
+		SumAverage(sales);
 	}
 
 	Sales::~Sales(){}
