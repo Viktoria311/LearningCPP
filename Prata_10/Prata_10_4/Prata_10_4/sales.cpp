@@ -53,7 +53,7 @@ namespace SALES
 		}
 	}
 
-	void Sales::SetMaxMin(const std::array<double, QUARTERS>& arr)
+	void Sales::SetMaxMin()
 	{
 		min = sales[0];
 
@@ -77,13 +77,13 @@ namespace SALES
 			average /= vec.size();
 		}
 	}
-	void Sales::SumAverage(const std::array<double, QUARTERS>& arr)
+	void Sales::SumAverage()
 	{
 		average = 0.0;
 
-		for (int i = 0; i < arr.size(); ++i)
-				average += arr[i];
-		average /= arr.size();
+		for (int i = 0; i < sales.size(); ++i)
+				average += sales[i];
+		average /= sales.size();
 	
 	}
 	Sales::Sales(const std::vector<double>& vec)
@@ -96,8 +96,8 @@ namespace SALES
 	Sales::Sales()
 	{
 		SetSales();
-		SetMaxMin(sales);
-		SumAverage(sales);
+		SetMaxMin();
+		SumAverage();
 	}
 
 	Sales::~Sales(){}
