@@ -9,38 +9,49 @@ namespace SALES
 	{
 		if (vec.size() == QUARTERS)
 		{
-			average = 0.0;
+			double min_ = vec[0];
 
-			max = vec.at(0);
+			double max_ = vec[0];
 
-			min = vec.at(0);
-
+			double average_ = vec[0];
+			
 			for (int i = 0; i < vec.size(); ++i)
 			{
 				sales[i] = vec[i];
-				average += vec[i];
-				if (vec.at(i) > max) max = vec.at(i);
-				if (vec.at(i) < min) min = vec.at(i);
+				average_ += vec[i];
+				if (max_ < vec[i]) max_ = vec[i];
+				if (min_ > vec[i]) min_ = vec[i];
 			}
-			average /= vec.size();
-		} else 
+			min = min_;
+			max = max_;
+			average = average_ / sales.size();
+		} else if (vec.empty())
+		{
+			max = min = average = sales[3] = sales[2] = sales[1] = sales[0] = 0.0;
+		} else
 		{
 			for (int i = 0; i < QUARTERS && i < vec.size(); ++i)
 				sales[i] = vec[i];
 
-			average = vec.at(0);
+			if (vec.size() < QUARTERS)
+				for (int i = vec.size(); i < QUARTERS; ++i)
+					sales[i] = 0.0;
 
-			max = vec.at(0);
+			double min_ = vec[0];
 
-			min = vec.at(0);
+			double max_ = vec[0];
+
+			double average_ = vec[0];
 
 			for (int i = 1; i < vec.size(); ++i)
 			{
 				average += vec.at(i);
-				if (vec.at(i) > max) max = vec.at(i);
-				if (vec.at(i) < min) min = vec.at(i);
+				if (max_ < vec[i]) max_ = vec[i];
+				if (min_ > vec[i]) min_ = vec[i];
 			}
-			average /= vec.size();
+			min = min_;
+			max = max_;
+			average = average_ / sales.size();
 		}
 	}
 
@@ -56,22 +67,21 @@ namespace SALES
 				std::cout << "Try again to enter sales of " << i + 1 << " quarter: ";
 			}
 		}
-		double min = sales[0];
+		double min_ = sales[0];
 
-		double max = sales[0];
+		double max_ = sales[0];
 
-		double average = sales[0];
+		double average_ = sales[0];
 
 		for (int i = 1; i < sales.size(); ++i)
 		{
-			if (min > sales[i]) min = sales[i];
-			if (max < sales[i]) max = sales[i];
-			average += sales[i];
+			if (min > sales[i]) min_ = sales[i];
+			if (max < sales[i]) max_ = sales[i];
+			average_ += sales[i];
 		}
-
-		min = min;
-		max = max;
-		average = average / sales.size();
+		min = min_;
+		max = max_;
+		average = average_ / sales.size();
 	}
 
 	Sales::~Sales(){}
