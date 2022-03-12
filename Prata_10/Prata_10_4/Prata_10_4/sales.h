@@ -16,6 +16,7 @@ namespace SALES
 		double min;
 		void SetSales(const std::vector<double>& vec);
 		void SetSales();
+		void setmaxmin(const std::vector<double>& vec);
 		void SetMaxMin(const std::vector<double>& vec);
 		void SetMaxMin();
 		void SumAverage(const std::vector<double>& vec);

@@ -36,7 +36,7 @@ namespace SALES
 		}
 	}
 
-	void Sales::SetMaxMin(const std::vector<double>& vec)
+	void Sales::setmaxmin(const std::vector<double>& vec)
 	{
 		if (vec.empty()) max = min = 0.0;
 		else
@@ -53,17 +53,18 @@ namespace SALES
 		}
 	}
 
+	void Sales::SetMaxMin(const std::vector<double>& vec)
+	{
+		setmaxmin(vec);
+	}
+
 	void Sales::SetMaxMin()
 	{
-		min = sales[0];
+		std::vector<double> vec;
 
-		max = sales[0];
-
-		for (int i = 1; i < sales.size(); ++i)
-		{
-			if (min > sales[i]) min = sales[i];
-			if (max < sales[i]) max = sales[i];
-		}
+		for (int i = 0; i < sales.size(); ++i)
+			vec.push_back(sales[i]);
+		setmaxmin(vec);
 	}
 	void Sales::SumAverage(const std::vector<double>& vec)
 	{
