@@ -14,6 +14,12 @@ int EnterNumber()
 	return n;
 }
 
+int EnterElement()
+{
+	std::cout << "Enter your element: ";
+	return EnterNumber();
+}
+
 int EnterCount()
 {
 	int num;
@@ -23,7 +29,7 @@ int EnterCount()
 		num = EnterNumber();
 		if (num <= 0)
 		{
-			std::cout << "A number of element can`t be  zero or less than zero." << std::endl;
+			std::cout << "A number of element can`t be zero or less than zero." << std::endl;
 			std::cout << "Try again to enter a number of element: ";
 		}
 	} while (num <= 0);
@@ -45,15 +51,16 @@ void ReduceByThree(int& var)
 {
 	var -= 3;
 }
+
 void AddingFunc(MyList& first_list)
 {
 	bool want;
 
-	std::cout << "Do you want to add after after a specific element? 1 - yes, 0- no  ";
+	std::cout << "Do you want to add your element after a specific element? 1 - yes, 0- no  ";
 	std::cin >> want;
 	std::cin.ignore(100, '\n');
-	if (want) first_list.AddAfter(EnterCount(), &element(EnterNumber()));
-	else first_list.Add(&element(EnterNumber()));
+	if (want) first_list.AddAfter(EnterCount(), EnterElement());
+	else first_list.Add(EnterElement());
 }
 
 void AddingLoop(MyList& first_list)
@@ -61,7 +68,7 @@ void AddingLoop(MyList& first_list)
 	bool want;
 	//first add
 	std::cout << "Let`s add some element to your list!" << std::endl;
-	first_list.Add(&element(EnterNumber()));
+	first_list.Add(EnterNumber());
 	first_list.ShowAll();
 	//other loop
 	do
@@ -150,13 +157,20 @@ void SwapingLoop(MyList& first_list)
 		std::cin.ignore(100, '\n');
 		if (want)
 		{
-			int a = EnterCount();
-			int b = EnterCount();
-			std::cout << "Before swap:" << std::endl;
-			first_list.ShowAll();
-			first_list.Swap(a, b);
-			std::cout << "After swap:" << std::endl;
-			first_list.ShowAll();
+			if (first_list.Count() <= 1) std::cout << "You can`t swap." << std::endl;
+			else
+			{
+				std::cout << "There are " << first_list.Count() << " elements in this list." << std::endl;
+				std::cout << "Enter counts of elements which you want to swap." << std::endl;
+				int a = EnterCount();
+				int b = EnterCount();
+				std::cout << "Before swap:" << std::endl;
+				first_list.ShowAll();
+				while (!(first_list.Swap(a, b)));
+				std::cout << "After swap:" << std::endl;
+				first_list.ShowAll();
+			}
+			
 		}
 	} while(want);
 	

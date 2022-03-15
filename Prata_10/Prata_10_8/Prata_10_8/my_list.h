@@ -23,15 +23,16 @@ private:
 
 public:
 	MyList();
+   ~MyList();
 	int Count() const;
-	void Add(element* obj_new);
-	void AddAfter(int count, element* obj_new);
+	void Add(int value);
+	void AddAfter(int count, int value);
 	bool IsEmpty() const;
 	void Do(somefunc_t somefunc);
 	void DeleteFirst();
 	void DeleteLast();
 	void Delete(int count);
-	void Swap(int count1, int count2);
+	bool Swap(int count1, int count2);
 	void ShowAll() const;
 	void ShowElement(int count) const;
 

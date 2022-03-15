@@ -5,6 +5,7 @@
 #include "my_list.h"
 
 int EnterNumber();
+int EnterElement();
 int EnterCount();
 void DoubleTheSize(int& var);
 void IncreaceByTen(int& var);

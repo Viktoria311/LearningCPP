@@ -12,7 +12,7 @@ int main()
 	ChangingLoop(first_list);
 	SwapingLoop(first_list);
 	
-	std::cout << "Bye!";
+	std::cout << std::endl << "Bye!";
 
 	return 0;
 }
