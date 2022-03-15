@@ -21,9 +21,15 @@
     <ClCompile Include="vect.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="funcs.cpp">
+      <Filter>Resource Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="vect.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="funcs.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
