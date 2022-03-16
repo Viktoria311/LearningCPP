@@ -1,0 +1,8 @@
+Target Distance: 100, Step Size: 30
+max: 50
+min: 0
+average quantity of steps: 12
+Target Distance: 250, Step Size: 35
+max: 54
+min: 0
+average quantity of steps: 7
