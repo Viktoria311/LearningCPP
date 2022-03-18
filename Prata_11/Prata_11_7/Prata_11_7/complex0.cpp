@@ -13,7 +13,7 @@ void Complex0::Show() const
 	std::cout << "(" << real_part_ << "," << imaginary_part_ << "i)";
 }
 
-Complex0 Complex0::operator=(const Complex0& obj)
+Complex0& Complex0::operator=(const Complex0& obj)
 {
 	if (*this == obj) return *this;
 	else

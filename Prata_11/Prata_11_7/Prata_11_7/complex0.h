@@ -10,7 +10,7 @@ class Complex0
 		Complex0(double real_part = 0.0, double imaginary_part = 0.0);
 	   ~Complex0(){}
 	    void Show() const;
-		Complex0 operator=(const Complex0& obj);
+		Complex0& operator=(const Complex0& obj);
 		Complex0 operator+(const Complex0& obj) const;
 		Complex0 operator-(const Complex0& obj) const;
 		Complex0 operator*(const Complex0& obj) const;
