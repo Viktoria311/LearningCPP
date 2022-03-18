@@ -6,8 +6,6 @@ Cow::Cow()
 {
 	name_ = "no name";
 	hobby_ = new char[20];
-	for (int i = 0; i <= 19; ++i)
-		hobby_[i] = '\0';
 	strcpy_s(hobby_, 19, "no hobby");
 	weight_ = 0.0;
 }
@@ -16,9 +14,7 @@ Cow::Cow(const std::string& name, const char* hobby, double weight)
 {
 	name_ = "no name";
 	hobby_ = new char[strlen(hobby) + 1];
-	for (int i = 0; i <= strlen(hobby); ++i)
-		hobby_[i] = '\0';
-	strcpy_s(hobby_, strlen(hobby) - 1, hobby);
+	strcpy_s(hobby_, strlen(hobby) + 1, hobby);
 	weight_ = weight;
 }
 
@@ -26,9 +22,7 @@ Cow::Cow(const Cow& c)
 {
 	name_ = c.name_;
 	hobby_ = new char[strlen(c.hobby_) + 1];
-	for (int i = 0; i <= strlen(c.hobby_); ++i)
-		hobby_[i] = '\0';
-	strcpy_s(hobby_, strlen(c.hobby_), c.hobby_);
+	strcpy_s(hobby_, strlen(c.hobby_) + 1, c.hobby_);
 	
 	weight_ = c.weight_;
 }
@@ -53,9 +47,8 @@ Cow& Cow::operator=(const Cow& c)
 		name_ = c.name_;
 		delete[] hobby_;
 		hobby_ = new char[strlen(c.hobby_ + 1)];
-		for (int i = 0; i <= strlen(c.hobby_); ++i)
-			hobby_[i] = '\0';
-		strcpy_s(hobby_, strlen(c.hobby_), c.hobby_);
+
+		strcpy_s(hobby_, strlen(c.hobby_) + 1, c.hobby_);
 		
 		weight_ = c.weight_;
 	}
