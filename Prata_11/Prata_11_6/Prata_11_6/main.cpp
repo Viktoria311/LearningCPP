@@ -20,7 +20,7 @@ int main()
 	}
 	AddOtherElements(arr, quantity);
 
-	std::cout << "With what do you want to compare elements? 1 - with stones, 0 - with pounds";
+	std::cout << "With what do you want to compare elements? 1 - with stones, 0 - with pounds ";
 	std::cin >> with_stones;
 	std::cin.ignore(100, '\n');
 	if (with_stones)
@@ -28,12 +28,7 @@ int main()
 		int st;
 
 		std::cout << "Enter stones for comparing: ";
-		while (!(std::cin >> st))
-		{
-			std::cin.clear();
-			std::cin.ignore(100, '\n');
-			std::cout << "Try to enter again: ";
-		}
+		EnterValue(st);
 		ShowResults(arr, st);
 	}
 	else
@@ -41,16 +36,9 @@ int main()
 		double p;
 
 		std::cout << "Enter pounds for comparing: ";
-		while (!(std::cin >> p))
-		{
-			std::cin.clear();
-			std::cin.ignore(100, '\n');
-			std::cout << "Try to enter again: ";
-		}
+		EnterValue(p);
 		ShowResults(arr, p);
 	}
-	//auto q =  EnterValueWithoutType();
-	//ShowResults(arr, q);
 	
 	std::cout << "Bye! " << std::endl;
 
