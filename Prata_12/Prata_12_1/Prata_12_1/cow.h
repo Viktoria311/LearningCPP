@@ -1,6 +1,7 @@
 #ifndef COW_H_
 #define COW_H_
 
+#include <iostream>
 #include <string>
 
 class Cow
@@ -16,6 +17,8 @@ public:
    ~Cow();
     void ShowCow() const;
 	Cow& operator=(const Cow& c);
+	friend std::ostream& operator<<(std::ostream& os, const Cow& c);
+	friend std::istream& operator>>(std::istream& is, Cow& c);
 };
 
 #endif
