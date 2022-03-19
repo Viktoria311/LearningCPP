@@ -12,7 +12,7 @@ Cow::Cow()
 
 Cow::Cow(const std::string& name, const char* hobby, double weight)
 {
-	name_ = "no name";
+	name_ = name;
 	hobby_ = new char[strlen(hobby) + 1];
 	strcpy_s(hobby_, strlen(hobby) + 1, hobby);
 	weight_ = weight;
@@ -45,12 +45,14 @@ Cow& Cow::operator=(const Cow& c)
 	else
 	{
 		name_ = c.name_;
+
 		delete[] hobby_;
 		hobby_ = new char[strlen(c.hobby_ + 1)];
-
 		strcpy_s(hobby_, strlen(c.hobby_) + 1, c.hobby_);
 		
 		weight_ = c.weight_;
+
+		return *this;
 	}
 }
 
@@ -85,5 +87,6 @@ std::istream& operator>>(std::istream& is, Cow& c)
 	}
 
 	c = Cow(name, hobby, weight);
+	c.ShowCow();
 	return is;
 }
