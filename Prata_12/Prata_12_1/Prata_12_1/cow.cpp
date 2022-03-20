@@ -27,6 +27,13 @@ Cow::Cow(const Cow& c)
 	weight_ = c.weight_;
 }
 
+Cow::Cow(Cow&& c)
+{
+	name_ = c.name_;
+	std::swap(hobby_, c.hobby_);
+	weight_ = c.weight_;
+}
+
 Cow::~Cow()
 {
 	delete[] hobby_;
@@ -54,6 +61,15 @@ Cow& Cow::operator=(const Cow& c)
 
 		return *this;
 	}
+}
+
+Cow& Cow::operator=(Cow&& c)
+{
+	name_ = c.name_;
+	std::swap(hobby_, c.hobby_);
+	weight_ = c.weight_;
+
+	return *this;
 }
 
 std::ostream& operator<<(std::ostream& os, const Cow& c)
@@ -87,6 +103,5 @@ std::istream& operator>>(std::istream& is, Cow& c)
 	}
 
 	c = Cow(name, hobby, weight);
-	c.ShowCow();
 	return is;
 }

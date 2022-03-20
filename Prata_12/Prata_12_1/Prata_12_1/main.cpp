@@ -7,7 +7,6 @@ int main()
 	std::vector<Cow> cows;
 	bool want;
 	Cow some;
-
 	do
 	{
 	
@@ -18,7 +17,6 @@ int main()
 		//std::cin.get();
 		std::cin.ignore(100, '\n');
 	} while (want);
-
 
 
 	cows.push_back(Cow("zzzz", "xxxx", 34));
