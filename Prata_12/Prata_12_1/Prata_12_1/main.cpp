@@ -19,9 +19,9 @@ int main()
 	} while (want);
 
 
-	cows.push_back(Cow("zzzz", "xxxx", 34));
-	cows.push_back(Cow("dddddddd", "ffffffffff", 34));
-	cows.push_back(Cow("aaaaaaa", "sssss", 84));
+	cows.push_back(std::move(Cow("zzzz", "xxxx", 34)));
+	//cows.push_back(Cow("dddddddd", "ffffffffff", 34));
+	//cows.push_back(Cow("aaaaaaa", "sssss", 84));
 
 	for (int i = 0; i < cows.size(); ++i)
 		std::cout << cows[i] << std::endl;

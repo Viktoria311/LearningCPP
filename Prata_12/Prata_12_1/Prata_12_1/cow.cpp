@@ -5,8 +5,7 @@
 Cow::Cow()
 {
 	name_ = "no name";
-	hobby_ = new char[20];
-	strcpy_s(hobby_, 19, "no hobby");
+	hobby_ = nullptr;
 	weight_ = 0.0;
 }
 
@@ -29,8 +28,8 @@ Cow::Cow(const Cow& c)
 
 Cow::Cow(Cow&& c)
 {
-	name_ = c.name_;
-	std::swap(hobby_, c.hobby_);
+	name_ = std::move(c.name_);
+	hobby_ = std::move(c.hobby_);
 	weight_ = c.weight_;
 }
 
@@ -65,8 +64,8 @@ Cow& Cow::operator=(const Cow& c)
 
 Cow& Cow::operator=(Cow&& c)
 {
-	name_ = c.name_;
-	std::swap(hobby_, c.hobby_);
+	name_ = std::move(c.name_);
+	hobby_ = std::move(c.hobby_);
 	weight_ = c.weight_;
 
 	return *this;
