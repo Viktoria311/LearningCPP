@@ -18,7 +18,7 @@ class Cow
 	   ~Cow();
 		void ShowCow() const;
 		Cow& operator=(const Cow& c);
-		Cow& operator=(Cow& c);
+		Cow& operator=(Cow&& c);
 		friend std::ostream& operator<<(std::ostream& os, const Cow& c);
 		friend std::istream& operator>>(std::istream& is, Cow& c);
 };

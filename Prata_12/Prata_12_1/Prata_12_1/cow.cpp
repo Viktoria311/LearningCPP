@@ -29,7 +29,9 @@ Cow::Cow(const Cow& c)
 Cow::Cow(Cow&& c)
 {
 	name_ = std::move(c.name_);
+	c.name_ = nullptr;
 	hobby_ = std::move(c.hobby_);
+	c.hobby_ = nullptr;
 	weight_ = c.weight_;
 }
 
@@ -65,7 +67,9 @@ Cow& Cow::operator=(const Cow& c)
 Cow& Cow::operator=(Cow&& c)
 {
 	name_ = std::move(c.name_);
+	c.name_ = nullptr;
 	hobby_ = std::move(c.hobby_);
+	c.hobby_ = nullptr;
 	weight_ = c.weight_;
 
 	return *this;

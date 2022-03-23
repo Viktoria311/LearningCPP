@@ -11,7 +11,7 @@ int main()
 	{
 	
 		std::cin >> some;
-		cows.push_back(some);
+		cows.push_back(std::move(some));
 		std::cout << "Do you want to add one more cow? 1 - yes, 0 - no ";
 		std::cin >> want;
 		//std::cin.get();
