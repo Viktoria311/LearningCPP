@@ -1,5 +1,5 @@
 #ifndef MY_TEMPLATES_
-#define MY_TEMPLATES
+#define MY_TEMPLATES_
 
 #include <valarray>
 
@@ -41,8 +41,8 @@ template<> class Pair<std::valarray<int>, std::valarray<int>>
 		Pair(int q = 0) : years_(q), bottles_(q) { }
 		std::valarray<int>& years();
 		std::valarray<int>& bottles();
-		std::valarray<int> years() const { return years_; }
-		std::valarray<int> bottles() const { return bottles_; }
+		const std::valarray<int>& years() const { return years_; }
+		const std::valarray<int>& bottles() const { return bottles_; }
 };
 
 std::valarray<int>&  Pair<std::valarray<int>, std::valarray<int>>::years()

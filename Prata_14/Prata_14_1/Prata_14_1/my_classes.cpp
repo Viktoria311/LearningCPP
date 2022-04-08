@@ -6,8 +6,8 @@
 
 int Cool_Pair::size() const
 {
-	const std::valarray<int> y = years();
-	
+	const std::valarray<int> y = Pair::years();
+
 	return y.size();
 }
 
@@ -72,7 +72,7 @@ void Cool_Pair::Show() const
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-Wine::Wine(const std::string& name, int q, const int* y, const int* b) : name_(name),  p_(q, y, b)
+Wine::Wine(const std::string& name, int q, const int* y, const int* b) : name_(name), p_(q, y, b)
 {
 
 }
