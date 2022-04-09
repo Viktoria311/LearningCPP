@@ -5,7 +5,7 @@
 #include <valarray>
 #include "my_templates.h"
 
-class Cool_Pair : public Pair<std::valarray<int>, std::valarray<int>>
+class Cool_Pair : private Pair<std::valarray<int>, std::valarray<int>>
 {
 public:
 	Cool_Pair(int q, const int* years, const int* bottles) : Pair(q, years, bottles) { }
@@ -16,6 +16,7 @@ public:
 	int years(int i) const;
 	int bottles(int i) const;
 	void Show() const;
+
 };
 
 class Wine
@@ -31,6 +32,8 @@ public:
 	const std::string& Label() const;
 	int sum() const;
 	void Show() const;
+	void Show2() const;
+	operator const std::string&();
 };
 
 #endif 

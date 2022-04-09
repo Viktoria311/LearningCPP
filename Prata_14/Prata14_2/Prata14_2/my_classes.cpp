@@ -3,7 +3,6 @@
 #include "my_classes.h"
 #include "my_templates.h"
 
-
 int Cool_Pair::size() const
 {
 	const std::valarray<int> y = Pair::years();
@@ -103,4 +102,13 @@ void Wine::Show() const
 	std::cout << '\t' << "Year\tBottles\n";
 	for (int i = 0; i < p_.size(); ++i)
 		std::cout << "\t" << p_.years(i) << "\t" << p_.bottles(i) << std::endl;
+}
+
+Wine::operator const std::string&()
+{
+	return name_;
+}
+void Wine::Show2() const
+{
+	std::cout << "Use operator const std::string& : " << (const std::string&)(*this)<< std::endl;
 }
