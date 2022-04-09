@@ -1,5 +1,5 @@
-#ifndef MY_TEMPLATES_
-#define MY_TEMPLATES_
+#ifndef MY_TEMPLATES_H_
+#define MY_TEMPLATES_H_
 
 #include <valarray>
 
