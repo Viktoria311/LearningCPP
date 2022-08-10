@@ -56,7 +56,12 @@ private:
     bin_tree<int> numbers_tree;
     enum {Delete, Insert, Parent, Left, Right};
     int operation;
-    int pushed_number; // для создания одной общей функции , в которую поступит инфа об операции и о нажатой цифре
+    int pushed_number;
+    void delete_number();
+    void insert_number();
+    void show_parent();
+    void show_left_node();
+    void show_right_node();
 };
 
 #endif // MAINWINDOW_H

@@ -128,6 +128,76 @@ void MainWindow::show_vec() const
         std::cout << i;
     std::cout << std::endl;
 }
+void MainWindow::delete_number()
+{
+    if (numbers_tree.is_elem_in_tree(pushed_number))
+    {
+        auto i = numbers_vec.begin();
+        while( *i != pushed_number && i != numbers_vec.end())
+            ++i;
+
+        numbers_vec.erase(i);
+        numbers_tree.remote(pushed_number);
+    }
+    else
+        std::cout << "There is no " << pushed_number << " in the tree" << std::endl;
+}
+
+void MainWindow::insert_number()
+{
+    if (numbers_tree.is_elem_in_tree(pushed_number))
+        std::cout << "There has already been " << pushed_number << " element in the tree" << std::endl;
+    else
+    {
+        numbers_vec.push_back(pushed_number);
+        numbers_tree.insert(pushed_number);
+    }
+
+    show_vec();
+}
+
+void MainWindow::show_parent()
+{
+    const Node<int> * p_elem = numbers_tree.find(pushed_number);
+    const Node<int> * parent = numbers_tree.find_parent(pushed_number);
+
+    if (p_elem == nullptr) // элемента нет
+        std::cout << "There is no " << pushed_number << " in the tree" << std::endl;
+    else if (parent == nullptr)
+        std::cout << pushed_number << " is a root " << std::endl; // root
+    else
+        std::cout << "The parent of " << pushed_number << " is " << parent->value << std::endl;
+}
+
+void MainWindow::show_left_node()
+{
+    if (!(numbers_tree.is_elem_in_tree(pushed_number)))
+        std::cout << "There is no " << pushed_number << " in the tree" << std::endl;
+    else
+    {
+        const Node<int> * left_elem = numbers_tree.find(pushed_number)->left;
+
+        if (left_elem != nullptr)
+            std::cout << "The left element of " << pushed_number << " is " << left_elem->value << std::endl;
+        else
+            std::cout << "The left element of " << pushed_number << " is nullptr" << std::endl;
+    }
+}
+
+void MainWindow::show_right_node()
+{
+    if (!(numbers_tree.is_elem_in_tree(pushed_number)))
+        std::cout << "There is no " << pushed_number << " in the tree" << std::endl;
+    else
+    {
+        const Node<int> * right_elem = numbers_tree.find(pushed_number)->right;
+
+        if (right_elem != nullptr)
+            std::cout << "The right element of " << pushed_number << " is " << (numbers_tree.find(pushed_number)->right)->value << std::endl;
+        else
+            std::cout << "The right element of " << pushed_number << " is nullptr" << std::endl;
+    }
+}
 
 void MainWindow::what_to_do()
 {
@@ -139,69 +209,23 @@ void MainWindow::what_to_do()
     {
                     if (operation == Delete)
                     {
-                        if (numbers_tree.is_elem_in_tree(pushed_number))
-                        {
-                            auto i = numbers_vec.begin();
-                            while( *i != pushed_number && i != numbers_vec.end())
-                                ++i;
-
-                            numbers_vec.erase(i);
-                            numbers_tree.remote(pushed_number);
-                        }
-                        else
-                            std::cout << "There is no " << pushed_number << " in the tree" << std::endl;
+                        delete_number();
                     }
                     else if (operation == Insert)
                     {
-                        if (numbers_tree.is_elem_in_tree(pushed_number))
-                            std::cout << "There has already been " << pushed_number << " element in the tree" << std::endl;
-                        else
-                        {
-                            numbers_vec.push_back(pushed_number);
-                            numbers_tree.insert(pushed_number);
-                        }
-
-                        show_vec();
+                        insert_number();
                     }
                     else if (operation == Parent)
                     {
-                        const Node<int> * p_elem = numbers_tree.find(pushed_number);
-                        const Node<int> * parent = numbers_tree.find_parent(pushed_number);
-
-                        if (p_elem == nullptr) // элемента нет
-                            std::cout << "There is no " << pushed_number << " in the tree" << std::endl;
-                        else if (parent == nullptr)
-                            std::cout << pushed_number << " is a root " << std::endl; // root
-                        else
-                            std::cout << "The parent of " << pushed_number << " is " << parent->value << std::endl;
+                        show_parent();
                     }
                     else if (operation == Left)
                     {
-                        if (!(numbers_tree.is_elem_in_tree(pushed_number)))
-                            std::cout << "There is no " << pushed_number << " in the tree" << std::endl;
-                        else
-                        {
-                            const Node<int> * left_elem = numbers_tree.find(pushed_number)->left;
-
-                            if (left_elem != nullptr)
-                                std::cout << "The left element of " << pushed_number << " is " << left_elem->value << std::endl;
-                            else
-                                std::cout << "The left element of " << pushed_number << " is nullptr" << std::endl;
-                        }
+                        show_left_node();
                     }
                     else if (operation == Right)
                     {
-                        if (!(numbers_tree.is_elem_in_tree(pushed_number)))
-                            std::cout << "There is no " << pushed_number << " in the tree" << std::endl;
-                        else
-                        {
-                            const Node<int> * right_elem = numbers_tree.find(pushed_number)->right;
-
-                            if (right_elem != nullptr)
-                                std::cout << "The right element of " << pushed_number << " is " << (numbers_tree.find(pushed_number)->right)->value << std::endl;
-                            else
-                                std::cout << "The right element of " << pushed_number << " is nullptr" << std::endl;
-                        }
+                        show_right_node();
                     }
     }
 
